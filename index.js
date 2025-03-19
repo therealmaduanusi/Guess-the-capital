@@ -1,33 +1,34 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
+// import pg from "pg";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import env from "dotenv";
+import db from "./db.js"
+// import env from "dotenv";
 
-env.config();
+// env.config();
 
-const db = new pg.Client({
-  user: process.env.USER_NAME,
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  password: process.env.PASSWORD,
-  port: process.env.PORT,
-});
+// const db = new pg.Client({
+//   user: process.env.USER_NAME,
+//   host: process.env.HOST,
+//   database: process.env.DATABASE,
+//   password: process.env.PASSWORD,
+//   port: process.env.PORT,
+// });
 
-db.connect()
+// db.connect()
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 // quiz array
 let quiz = [];
 db.query("SELECT * FROM capital", (err, res) => {
     if (err) {
-      console.error("Error executing query", err.stack);
+        console.error("Error executing query", err.stack);
     } else {
-      quiz = res.rows;
+        quiz = res.rows;
     }
     db.end();
 });
