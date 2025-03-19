@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Guess the capital | quiz </title>
+</head>
+<body>
+    <main class="main">
+        <form action="/submit" class="form" method="post">
+            <h3 class="totalScore">
+                Total Scores
+                <span class="scores"><%= locals.totalScore ? totalScore : "0" %></span>
+            </h3>
+            <h1 class="countryName">
+                <%=question.country %>
+            </h1>
+            <input type="text" name="answer" class="inputData" placeholder="Name the capital" autofocus autocomplete="off">
+            <button type="submit">
+                Submit
+                <% if (locals.wasCorrect) { %>
+                    <span class="checkmark">✔</span>
+                <% } else if (locals.wasCorrect === false) { %>
+                    <span class="cross">❌</span>
+                <% } %>
+            </button>
+        </form>
+    </main>
+
+    <script>
+        let wasCorrect = "<%= locals.wasCorrect %>";
+        if (wasCorrect === "false") {
+            document.querySelector(".main").innerHTML = 
+            '<div class="resultContainer"><p>Your total score is <b><%= locals.totalScore %></b></p> <a href="/" class="restart-button">Restart</a></div>';
+        }
+       
+        
+    </script>
+</body>
+</html>
