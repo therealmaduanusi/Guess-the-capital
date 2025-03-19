@@ -49,6 +49,7 @@ let totalCorrect = 0;
 app.get("/", (req, res) => {
   totalCorrect = 0;
   nextQuestion();
+//   console.log(currentQuestion);
   res.render("index.ejs", {
     question: currentQuestion,
   });
