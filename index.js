@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { log } from "console";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +29,7 @@ let totalCorrect = 0;
 
 // route
 app.get("/", (req, res) => {
-    console.log(__dirname);
+    totalCorrect = 0;
     nextQuestion()
     res.render("index.ejs", {
         question: currentQuestion
@@ -39,12 +38,13 @@ app.get("/", (req, res) => {
 
 app.post("/submit", (req, res) => {
     let answer = req.body.answer.trim()
-    // console.log(req.body);
-    let isCorrect = false
+    let isCorrect = false;
+
     if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
         totalCorrect++
         isCorrect = true;
     }
+
     nextQuestion()
     res.render("index.ejs", {
         question: currentQuestion,
