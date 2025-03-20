@@ -46,16 +46,16 @@ let currentQuestion;
 let totalCorrect = 0;
 
 // route
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   totalCorrect = 0;
-  nextQuestion();
+  await nextQuestion();
 //   console.log(currentQuestion);
   res.render("index.ejs", {
     question: currentQuestion,
   });
 });
 
-app.post("/submit", (req, res) => {
+app.post("/submit", async (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
 
@@ -64,7 +64,7 @@ app.post("/submit", (req, res) => {
     isCorrect = true;
   }
 
-  nextQuestion();
+  await nextQuestion();
   res.render("index.ejs", {
     question: currentQuestion,
     totalScore: totalCorrect,
@@ -73,7 +73,7 @@ app.post("/submit", (req, res) => {
 });
 
 // random question
-function nextQuestion() {
+async function nextQuestion() {
   const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
   currentQuestion = randomCountry;
 }
