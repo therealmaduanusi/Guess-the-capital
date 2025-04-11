@@ -1,22 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
-// import pg from "pg";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import db from "./db.js"
-// import env from "dotenv";
 
-// env.config();
-
-// const db = new pg.Client({
-//   user: process.env.USER_NAME,
-//   host: process.env.HOST,
-//   database: process.env.DATABASE,
-//   password: process.env.PASSWORD,
-//   port: process.env.PORT,
-// });
-
-// db.connect()
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
@@ -24,6 +11,7 @@ const port = 3000;
 
 // quiz array
 let quiz = [];
+// Query database
 db.query("SELECT * FROM capital", (err, res) => {
     if (err) {
         console.error("Error executing query", err.stack);
@@ -45,7 +33,7 @@ app.set("view engine", "ejs");
 let currentQuestion;
 let totalCorrect = 0;
 
-// route
+// home route
 app.get("/", async (req, res) => {
   totalCorrect = 0;
   await nextQuestion();
@@ -55,6 +43,7 @@ app.get("/", async (req, res) => {
   });
 });
 
+// submit route
 app.post("/submit", async (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
