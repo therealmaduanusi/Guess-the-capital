@@ -11,15 +11,7 @@ const port = 3000;
 
 // quiz array
 let quiz = [];
-// Query database
-db.query("SELECT * FROM capital", (err, res) => {
-    if (err) {
-        console.error("Error executing query", err.stack);
-    } else {
-        quiz = res.rows;
-    }
-    db.end();
-});
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +29,10 @@ let totalCorrect = 0;
 app.get("/", async (req, res) => {
   totalCorrect = 0;
   await nextQuestion();
+  
+  if (!currentQuestion) {
+    return res.status(500).send("Could not fetch question from database");
+  }
 //   console.log(currentQuestion);
   res.render("index.ejs", {
     question: currentQuestion,
@@ -63,8 +59,21 @@ app.post("/submit", async (req, res) => {
 
 // random question
 async function nextQuestion() {
-  const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
-  currentQuestion = randomCountry;
+  try {
+    // Query database
+    let result = await db.query("SELECT * FROM capital");
+    quiz = result.rows;
+    // console.log(quiz);
+    const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
+    currentQuestion = randomCountry;
+    console.log(currentQuestion);
+    
+    // const result = await db.query("SELECT * FROM capital ORDER BY RANDOM() LIMIT 1");
+    // currentQuestion = result.rows[0];
+  } catch (error) {
+    console.error("Error fetching question:", error);
+    currentQuestion = null; // Fallback if something goes wrong
+  }
 }
 
 app.listen(port, () => {
