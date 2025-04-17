@@ -29,7 +29,7 @@ let totalCorrect = 0;
 app.get("/", async (req, res) => {
   totalCorrect = 0;
   await nextQuestion();
-  
+
   if (!currentQuestion) {
     return res.status(500).send("Could not fetch question from database");
   }
@@ -43,13 +43,14 @@ app.get("/", async (req, res) => {
 app.post("/submit", async (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
-
+  
   if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
     totalCorrect++;
     isCorrect = true;
   }
-
+  
   await nextQuestion();
+
   res.render("index.ejs", {
     question: currentQuestion,
     totalScore: totalCorrect,
