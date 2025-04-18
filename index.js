@@ -65,6 +65,7 @@ async function nextQuestion() {
     let result = await db.query("SELECT * FROM capitals");
     quiz = result.rows;
     // console.log(quiz);
+    
     const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
     currentQuestion = randomCountry;
     console.log(currentQuestion);
