@@ -62,7 +62,7 @@ app.post("/submit", async (req, res) => {
 async function nextQuestion() {
   try {
     // Query database
-    let result = await db.query("SELECT * FROM capital");
+    let result = await db.query("SELECT * FROM capitals");
     quiz = result.rows;
     // console.log(quiz);
     const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
