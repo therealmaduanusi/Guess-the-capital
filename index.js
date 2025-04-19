@@ -69,7 +69,7 @@ async function nextQuestion() {
     
     const randomCountry = quiz[Math.floor(Math.random() * quiz.length)];
     currentQuestion = randomCountry;
-    console.log(currentQuestion);
+    // console.log(currentQuestion);
     
   } catch (error) {
     console.error("Error fetching question:", error);
