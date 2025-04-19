@@ -44,6 +44,7 @@ app.post("/submit", async (req, res) => {
   let answer = req.body.answer.trim();
   let isCorrect = false;
   
+  // handle score value and styling attribute
   if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
     totalCorrect++;
     isCorrect = true;
@@ -70,8 +71,6 @@ async function nextQuestion() {
     currentQuestion = randomCountry;
     console.log(currentQuestion);
     
-    // const result = await db.query("SELECT * FROM capital ORDER BY RANDOM() LIMIT 1");
-    // currentQuestion = result.rows[0];
   } catch (error) {
     console.error("Error fetching question:", error);
     currentQuestion = null; // Fallback if something goes wrong
