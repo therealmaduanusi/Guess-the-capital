@@ -89,6 +89,7 @@ button:hover {
   background-color: rgba(236, 201, 75, 0.637);
 }
 
+/* RESULT STYLES */
 .resultContainer {
   background-color: #fff;
   font-size: 1.5rem;
@@ -99,6 +100,11 @@ button:hover {
 
 .resultContainer b {
   color: #ecc94bff;
+}
+
+.answer {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .restart-button {

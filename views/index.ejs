@@ -31,9 +31,19 @@
 
     <script>
         let wasCorrect = "<%= locals.wasCorrect %>";
+        let correctCapital = "<%= locals.correctCapital%>"
+        
         if (wasCorrect === "false") {
             document.querySelector(".main").innerHTML = 
-            '<div class="resultContainer"><p>Your total score is <b><%= locals.totalScore %></b></p> <a href="/" class="restart-button">Restart</a></div>';
+            `<div class="resultContainer">
+                <p class="answer">
+                    correct answer: <b>${correctCapital}</b>
+                </p>
+                <p>
+                    Your total score is <b><%= locals.totalScore %></b>
+                </p> 
+                <a href="/" class="restart-button">Restart</a>
+            </div>`;
         }
        
         

@@ -49,6 +49,8 @@ app.post("/submit", async (req, res) => {
     totalCorrect++;
     isCorrect = true;
   }
+
+  let correctCapital = currentQuestion.capital.toLowerCase();
   
   await nextQuestion();
 
@@ -56,6 +58,7 @@ app.post("/submit", async (req, res) => {
     question: currentQuestion,
     totalScore: totalCorrect,
     wasCorrect: isCorrect,
+    correctCapital: correctCapital
   });
 });
 
