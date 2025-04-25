@@ -31,3 +31,6 @@ The values are read using a templating language(EJS)
 
 > [!IMPORTANT]
 > The render DB expires on 16th may 2025
+
+### Acknowledge
+[Angela Yue](https://x.com/yu_angela)
